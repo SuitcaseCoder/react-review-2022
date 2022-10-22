@@ -1,11 +1,33 @@
 import React from 'react'
-import FeedbackItem from "./components/FeedbackItem";
+import PropTypes from 'prop-types'
+import FeedbackItem from "./FeedbackItem";
 
-function FeedbackList({feedback}) {
-    console.log(feedback)
+function FeedbackList({feedback, handleDelete}) {
+    if(!feedback || feedback.length === 0){
+        return <p>No Feedback Yet</p>
+    }
+
   return (
-    <div>List</div>
+    <div className="feedback-list">
+        {/* because we're returning JSX, what's being returned must be wrapped in parenthesis 🤦🏼‍♀️ */}
+        {feedback.map((item)=>(
+            <FeedbackItem 
+                key={item.id} 
+                item={item} 
+                handleDelete={handleDelete}/>
+        ))}
+    </div>
   )
+}
+
+FeedbackList.propTypes = {
+    feedback: PropTypes.arrayOf(
+        PropTypes.shape({
+            id: PropTypes.number.isRequired,
+            text: PropTypes.string.isRequired,
+            rating: PropTypes.number.isRequired,
+        })
+    )
 }
 
 export default FeedbackList
