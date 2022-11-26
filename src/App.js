@@ -13,6 +13,8 @@ import FeedbackForm from './components/FeedbackForm';
 import About from './pages/About';
 import AboutIconLink from './components/AboutIconLink';
 
+import {FeedbackProvider} from './context/FeedbackContext'
+
 //  POST used to show how to useParams & redirect using navigate with routes:
 // import Post from './components/Post';
 
@@ -38,6 +40,7 @@ function App() {
   };
 
   return (
+    <FeedbackProvider>
     <Router>
       <Header />
       <div className="container">
@@ -49,10 +52,9 @@ function App() {
                 // parent element still required
               <>
                 <FeedbackForm handleAdd={addFeedback} />
-                <FeedbackStats feedback={feedback} />
+                <FeedbackStats />
                 {/* feedback={feedback} -> 1st feedback == the name of the prop, 2nd feedback == what we named our state  */}
                 <FeedbackList
-                  feedback={feedback}
                   handleDelete={deleteFeedback}
                 />
               </>
@@ -68,6 +70,7 @@ function App() {
         <AboutIconLink />
       </div>
     </Router>
+    </FeedbackProvider>
   );
 }
 
