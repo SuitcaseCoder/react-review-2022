@@ -1,11 +1,14 @@
-import React, {useState} from "react";
+import React, {useState} from "react"
 import { v4 as uuidv4 } from 'uuid'
+import {BrowserRouter as Router, Route} from 'react-router-dom'
 
 import Header from "./components/Header";
 import FeedbackList from "./components/FeedbackList";
 import FeedbackData from "./data/FeedbackData";
 import FeedbackStats from "./components/FeedbackStats";
 import FeedbackForm from "./components/FeedbackForm";
+import About from "./pages/About";
+
 
 // go back to https://www.udemy.com/course/react-front-to-back-2022/learn/lecture/29767836#content section 4.24 to integrate a cool animation
 
@@ -30,15 +33,19 @@ function App(){
     }
 
     return (
-        <>
+        <Router>
         <Header />
         <div className="container">
+            <Route exact path='/'>
             <FeedbackForm handleAdd={addFeedback}/>
             <FeedbackStats feedback={feedback} />
             {/* feedback={feedback} -> 1st feedback == the name of the prop, 2nd feedback == what we named our state  */}
             <FeedbackList feedback={feedback} handleDelete={deleteFeedback} />
+            </Route>
+
+            <Route path='/about' component={About}/>
         </div>
-        </>
+        </Router>
     )
 }
 
