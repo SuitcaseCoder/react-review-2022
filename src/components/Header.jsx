@@ -1,5 +1,6 @@
 import React from 'react' // not necessary anymore
 import PropTypes from 'prop-types';
+import {Link} from 'react-router-dom'
 
 // instead of passing in all the props, we can replace props with curly brackets + whatever specific props we want to bring in
 function Header({text, bgColor, textColor}) {
@@ -11,7 +12,9 @@ function Header({text, bgColor, textColor}) {
   return (
     <header style={headerStyles}>
         <div className="container">
+            <Link to='/'>
             <h2>{text}</h2>
+            </Link>
         </div>
     </header>
 
